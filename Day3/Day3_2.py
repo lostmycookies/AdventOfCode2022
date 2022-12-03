@@ -5,17 +5,12 @@ Created on Fri Dec  2 21:41:35 2022
 @author: lostmycookies
 """
 
-
 with open('input.txt') as f:
-    lines = f.read().splitlines()  
-
-result = ''    
-
-string1 = lines[0]
-string2 = lines[1]
-string3 = lines[2]
+    lines = f.read().splitlines()    
 
 common = ''.join(set(string1).intersection(string2).intersection(string3))
+
+result = ''
 
 for i in range(len(lines))[0:len(lines):3]:
     string1 = lines[i]
