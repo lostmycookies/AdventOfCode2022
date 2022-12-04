@@ -21,7 +21,7 @@ for i in range(len(lines)):
     set1 = set(range(elfpair[0],elfpair[1]+1))
     set2 = set(range(elfpair[2],elfpair[3]+1))
     
-    if set1.intersection(set2) != set():
+    if set1 & set2:
         counter += 1
 
 print("The final result is %d." % (counter))
