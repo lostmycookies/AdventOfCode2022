@@ -11,7 +11,7 @@ import re
 with open('input.txt') as f:
     lines = f.read().splitlines()
 
-counter = 0
+counter = 0 
     
 for i in range(len(lines)):
     # Get the sections:
