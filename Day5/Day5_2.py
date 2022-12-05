@@ -54,11 +54,11 @@ for i in range(len(stackmoves)):
     movenumber = stackmoves[i][0]
     movefrom = stackmoves[i][1]
     moveto = stackmoves[i][2]
-    popper = deque()                # Implement another deque object for storage
+    craneload = deque()                # Implement another deque object for storage
     for j in range(movenumber):
-        popper.append(stacks[movefrom].popleft())
+        craneload.append(stacks[movefrom].popleft())
     for j in range(movenumber):
-        stacks[moveto].appendleft(popper.pop())
+        stacks[moveto].appendleft(craneload.pop())
 
 # Output
 
