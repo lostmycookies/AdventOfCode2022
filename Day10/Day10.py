@@ -11,7 +11,6 @@ import re
 with open('input.txt') as f:
     lines = f.read().splitlines()
     
-
 commands = []
 
 for items in lines:
@@ -19,23 +18,19 @@ for items in lines:
     
 X = 1
 cycle = 0
-X_register = []
 X_reg_dict = {}
 
 for items in commands:
     if items[0] == 'noop':
         cycle += 1
         X_reg_dict[cycle] = X
-        X_register.append([cycle,X])
     if items[0] == 'addx':
         cycle += 1
         X_reg_dict[cycle] = X
-        X_register.append([cycle,X])
         cycle += 1
         X_reg_dict[cycle] = X
         X += int(items[1])
-        X_register.append([cycle,X])
-        
+
 #################
 #   Part 1      #
 #################
@@ -48,7 +43,6 @@ for items in signal:
     
     
 print('\nThe resulting signal strength is: %s.\n' % (part_1_result))
-
 
 #################
 #   Part 2      #
