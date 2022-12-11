@@ -132,8 +132,6 @@ for i in range(rounds-1):
     monkeyround(result_dict)
 
 # Get the most active monkeys:
-
-activelist = []
     
 for items in result_dict:
     print('Monkey %s inspected items %s times.' % (items, result_dict[items].getInspections()))
