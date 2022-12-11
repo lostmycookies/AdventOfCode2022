@@ -8,7 +8,7 @@ Created on Sun Dec 11 10:08:22 2022
 
 import re
 
-with open('testinput.txt') as f:
+with open('input.txt') as f:
     lines = f.read().splitlines()
     
 class Monkey:
@@ -44,7 +44,8 @@ class Monkey:
         
     def setInspections(self,inspections):
         self.inspections = inspections
-        
+    
+    # Call of function adds an inspection
     def addInspection(self):
         self.inspections = self.inspections+1
 
@@ -125,10 +126,10 @@ def monkeyround(monkeydictinput):
 monkeydict = monkeybuild(lines)
 result_dict = monkeyround(monkeydict)
 
-rounds = 1000
+rounds = 20
 
 for i in range(rounds-1):
-    new_dict = monkeyround(result_dict)
+    monkeyround(result_dict)
 
 # Get the most active monkeys:
 
