@@ -107,7 +107,6 @@ def monkeyround(monkeydictinput):
                 new = eval(old + operator + operation[2])
             # Use worry reducer:
             new = new % worry_coefficient
-            # new 
             # Add inspection and decide:
             monkeys[i].addInspection()
             passtest = monkeys[i].getThrow()[0][0]
@@ -132,7 +131,7 @@ result_dict = monkeyround(monkeydict)
 rounds = 10000
 
 for i in range(rounds-1):
-    new_dict = monkeyround(result_dict)
+    monkeyround(result_dict)
 
 # Get the most active monkeys:
 
