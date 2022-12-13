@@ -244,6 +244,67 @@ if __name__ == '__main__':
             
         print(''.join(crt[i*crt_pixel_per_line:(i+1)*crt_pixel_per_line])) 
 
+##############################
+# Fun times                  #
+##############################
+
+# Make a map
+
+import pandas as pd
+import plotly.graph_objects as go
+
+# create dict for elevation
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+height = range(1,27)
+ele_dic = dict(zip(alphabet, height)) #elevation dictionary
+ele_dic['S'] = 1
+ele_dic['E'] = 26
+
+coord_list = []
+draw_path_list = []
+
+for i in range(len(lines)):
+    for j in range(len(lines[i])): 
+        letter_transform = ele_dic[lines[i][j]]
+        coord_list.append((i,j,letter_transform))
+        if (i,j) in pathdict.values():
+            draw_path_list.append((j,i,letter_transform+0.5))
+
+# Read the path data:
     
+path_df =pd.DataFrame(draw_path_list,columns=['X','Y','Z'], dtype = float)
+# path_df = path_df.pivot(index='X', columns='Y', values='Z')
+
+# Read the terrain data:
+z_data = pd.DataFrame(coord_list,columns=['X','Y','Z'], dtype = int)
+z_data = z_data.pivot(index='X', columns='Y', values='Z')
+
+
+fig1 = go.Figure(data=[go.Surface(z=z_data.values, colorscale='Aggrnyl')])
+fig1.update_traces(contours_z=dict(show=True, usecolormap=True,
+                                  highlightcolor="limegreen", project_z=True))
+fig2 = go.Figure(data=[go.Scatter3d(x=path_df['X'],y=path_df['Y'],z=path_df['Z'],
+                                    marker=dict(size=10,
+                                    color= ['tan' for i in zip(path_df['X'].values, path_df['Y'].values, path_df['Z'].values)],
+                                    symbol = ['circle' for i in zip(path_df['X'].values, path_df['Y'].values, path_df['Z'].values)],
+                                    opacity=1),
+                                    mode='markers')])
+
+fig3 = go.Figure(data=fig1.data + fig2.data)
+
+fig3.update_layout(title='Elf Hiking Trail', autosize=False,
+                  width=1000, height=600, 
+                  margin=dict(l=80, r=80, b=80, t=60))
+fig3.update_layout(scene_aspectmode='manual',
+                  scene_aspectratio=dict(x=1, y=0.3, z=0.3))
+
+fig3.write_html("Elf_Terrain.html")
+
+
+
+
+
+
+
     
     
